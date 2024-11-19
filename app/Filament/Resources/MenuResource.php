@@ -42,7 +42,10 @@ class MenuResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name'),
+                TextColumn::make('description'),
+                TextColumn::make('price')
+                    ->prefix('Rp. ')
             ])
             ->filters([
                 //
