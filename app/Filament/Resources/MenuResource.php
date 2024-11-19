@@ -5,11 +5,15 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\MenuResource\Pages;
 use App\Filament\Resources\MenuResource\RelationManagers;
 use App\Models\Menu;
-use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Forms;
+use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -23,7 +27,14 @@ class MenuResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name')->required(),
+                Textarea::make('description'),
+                TextInput::make('price')
+                    ->numeric()
+                    ->prefix('Rp. ')
+                    ->maxValue(42949672.95),
+                FileUpload::make('image_url')
+                    ->image()
             ]);
     }
 
